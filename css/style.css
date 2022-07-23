@@ -1,0 +1,260 @@
+/* Start Global Rules */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+::-webkit-scrollbar {
+  /* width: 10px; */
+  width: 0;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(110, 123, 251, 1);
+  border-radius: 30px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: aquamarine;
+  border-radius: 30px;
+}
+
+:root {
+  --main-color: #31313188;
+  --second-color: #222222;
+  --third-color: #181818;
+  --background-color: black;
+  --text-color: white;
+  --blur: blur(0);
+  --background-image: linear-gradient(to right, #212121 0%, #212121 100%);
+  --box-shadow-color: red;
+  --main-transition: 1s;
+}
+
+.light-mode {
+  --main-color: rgba(255, 255, 255, 0.3);
+  --second-color: rgba(255, 255, 255, 0.4);
+  --third-color: rgba(255, 255, 255, 1);
+  /* --background-color: purple; */
+  --text-color: #222;
+  --blur: blur(10px);
+  /* --background-image: linear-gradient(to right, #8360c3, #2ebf91); */
+  background-image: linear-gradient(
+    109.6deg,
+    rgba(156, 252, 248, 1) 11.2%,
+    rgba(110, 123, 251, 1) 91.1%
+  );
+  --box-shadow-color: white;
+}
+
+body {
+  font-family: "Cairo", sans-serif;
+  /* background-color: var(--background-color); */
+  background-image: var(--background-image);
+  color: var(--text-color);
+}
+
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+/* Small */
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+
+/* Medium */
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+
+/* Large */
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+/* End Global Rules */
+
+main {
+  /* background-color: var(--main-color); */
+  width: 100%;
+  height: 80vh;
+  border-radius: 10px;
+  box-shadow: 0 0 4px 1px var(--box-shadow-color);
+  display: flex;
+  overflow: hidden;
+  /* color: white; */
+  position: relative;
+}
+
+.form {
+  flex: 1.2;
+  background-color: var(--second-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  height: 100%;
+  padding: 20px;
+  position: relative;
+}
+
+.mode {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  cursor: pointer;
+  color: var(--text-color);
+  z-index: 1;
+}
+
+form {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.field {
+  display: flex;
+  gap: 20px;
+}
+
+.field:first-of-type {
+  align-items: center;
+}
+
+.field:last-of-type {
+  height: 100%;
+}
+
+label {
+  /* color: white; */
+  width: 70px;
+}
+
+input,
+textarea {
+  background-color: var(--main-color);
+  border: none;
+  border-radius: 6px;
+  width: 100%;
+  outline: none;
+  padding: 4px 15px;
+  color: inherit;
+}
+
+textarea {
+  padding: 10px;
+  resize: none;
+}
+
+input[type="submit"] {
+  align-self: flex-end;
+  width: fit-content;
+  padding: 10px 20px;
+}
+.notes {
+  background-color: var(--main-color);
+  flex: 2;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  height: 100%;
+  padding: 20px;
+  overflow-y: auto;
+  /* position: relative; */
+}
+
+.note {
+  background-color: purple;
+  border-radius: 10px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.note .delete {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  opacity: 0;
+}
+
+.note:hover .delete {
+  opacity: 1;
+}
+
+.show-note {
+  background-color: var(--third-color);
+  width: 100%;
+  height: calc(100% + 1px);
+  position: absolute;
+  /* position: fixed; */
+  top: 0;
+  left: 0;
+  padding: 60px;
+  transform: translate(0);
+  transition: var(--main-transition);
+}
+
+.show-note .close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.show-note .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.show-note .content .date {
+  align-self: flex-end;
+}
+
+.show-note.hide {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  transform: translate(-100%);
+}
+
+@media (max-width: 991px) {
+  main {
+    flex-direction: column;
+    overflow-y: scroll;
+  }
+
+  .notes {
+    overflow-y: visible;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .show-note {
+    position: fixed;
+  }
+}
